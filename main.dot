@@ -1,0 +1,15 @@
+digraph "CFG for 'main' function" {
+	AA0 [shape=record, label="{BB0:\l\l  br  BB1\l}"];
+	AA0 -> AA1
+	AA1 [shape=record, label="{BB1:\l\l  %i.0 = phi [ 1, BB0], [  %7, BB10]\l %max.0 = phi [ 0, BB0], [  %max.1, BB10]\l %2 = icmp-slt  %i.0,  %argc\l br %2 BB11 BB3\l}"];
+	AA1 -> AA11
+	AA1 -> AA3
+	AA3 [shape=record, label="{BB3:\l\l \l %4 = getelementptr %argv,  %i.0\l %5 = load %4\l %6 = call\l %7 = add %i.0, \l %8 = icmp-sgt  %6,  %max.0\l br %8 BB10 BB9\l}"];
+	AA3 -> AA10
+	AA3 -> AA9
+	AA9 [shape=record, label="{BB9:\l\l  br  BB10\l}"];
+	AA9 -> AA10
+	AA10 [shape=record, label="{BB10:\l\l  %max.1 = phi [  %6, BB9], [  %max.0, BB3]\l br  BB1\l}"];
+	AA10 -> AA1
+	AA11 [shape=record, label="{BB11:\l\l  %12 = call %max.0,  %printf, \l ret \l}"];
+}
