@@ -1,5 +1,5 @@
-#ifndef ADDCONST_H
-#define ADDCONST_H
+#ifndef CFGPRINT_H
+#define CFGPRINT_H
 
 #include <fstream>
 #include <string>
@@ -8,6 +8,9 @@
 
 #include "llvm/IR/PassManager.h"
 #include "llvm/IR/InstrTypes.h"
+#include "llvm/IR/Function.h"
+#include "llvm/IR/Instructions.h"
+#include "llvm/IR/PassManager.h"
 
 using namespace llvm;
 using namespace std;
@@ -28,6 +31,10 @@ namespace cfgPrint {
         string getName(const Value *v); 
 
         void get_map_label(Function &F);
+        void BrNode(BasicBlock::iterator I, vector<string> &target);
+        void PhiNode(BasicBlock::iterator I);
+        void RetNode(BasicBlock::iterator I);
+        void OtherNode(BasicBlock::iterator I);
         
         private:
             raw_ostream &OS;
