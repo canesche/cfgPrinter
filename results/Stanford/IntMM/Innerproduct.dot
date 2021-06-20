@@ -1,0 +1,12 @@
+digraph "CFG for 'Innerproduct' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %16 = store 0,  %result\l br  BB1\l}"];
+	AA0 -> AA1
+	AA1 [shape=record, label="{BB1:\l\l  %i.0 = phi [ 1, BB0 ], [  %14, BB13 ]\l %2 = icmp-sle %i.0,  40\l br %2 BB3 BB15\l}"];
+	AA1 -> AA3
+	AA1 -> AA15
+	AA3 [shape=record, label="{BB3:\l\l  %4 = load %result\l %5 = getelementptr %a,  %row\l %6 = getelementptr %5,  0,  %i.0\l %7 = load %6\l %8 = getelementptr %b,  %i.0\l %9 = getelementptr %8,  0,  %column\l %10 = load %9\l %11 = mul-nsw %7,  %10\l %12 = add-nsw %4,  %11\l %17 = store %12,  %result\l br  BB13\l}"];
+	AA3 -> AA13
+	AA13 [shape=record, label="{BB13:\l\l  %14 = add-nsw %i.0,  1\l br  BB1\l}"];
+	AA13 -> AA1
+	AA15 [shape=record, label="{BB15:\l\l  ret void\l}"];
+}

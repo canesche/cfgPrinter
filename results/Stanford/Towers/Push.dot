@@ -1,0 +1,18 @@
+digraph "CFG for 'Push' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = getelementptr %stack,  0,  %s\l %2 = load %1\l %3 = icmp-sgt %2,  0\l br %3 BB4 BB14\l}"];
+	AA0 -> AA4
+	AA0 -> AA14
+	AA4 [shape=record, label="{BB4:\l\l  %5 = getelementptr %stack,  0,  %s\l %6 = load %5\l %7 = getelementptr %cellspace,  0,  %tmp3\l %8 = getelementptr %7,  0,  0\l %9 = load %8\l %10 = icmp-sle %9,  %i\l br %10 BB11 BB13\l}"];
+	AA4 -> AA11
+	AA4 -> AA13
+	AA11 [shape=record, label="{BB11:\l\l  %26 = @Error()\l br  BB13\l}"];
+	AA11 -> AA13
+	AA13 [shape=record, label="{BB13:\l\l  %errorfound.0 = phi [ 1, BB11 ], [ 0, BB4 ]\l br  BB14\l}"];
+	AA13 -> AA14
+	AA14 [shape=record, label="{BB14:\l\l  %errorfound.1 = phi [  %errorfound.0, BB13 ], [ 0, BB0 ]\l %15 = icmp-ne %errorfound.1,  0\l br %15 BB25 BB16\l}"];
+	AA14 -> AA25
+	AA14 -> AA16
+	AA16 [shape=record, label="{BB16:\l\l  %17 = call()\l %18 = getelementptr %stack,  0,  %s\l %19 = load %18\l %20 = getelementptr %cellspace,  0,  %call\l %21 = getelementptr %20,  0,  1\l %27 = store %19,  %21\l %22 = getelementptr %stack,  0,  %s\l %28 = store %17,  %22\l %23 = getelementptr %cellspace,  0,  %call\l %24 = getelementptr %23,  0,  0\l %29 = store %i,  %24\l br  BB25\l}"];
+	AA16 -> AA25
+	AA25 [shape=record, label="{BB25:\l\l  ret void\l}"];
+}

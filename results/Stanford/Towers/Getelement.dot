@@ -1,0 +1,10 @@
+digraph "CFG for 'Getelement' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = load %freelist\l %2 = icmp-sgt %1,  0\l br %2 BB3 BB9\l}"];
+	AA0 -> AA3
+	AA0 -> AA9
+	AA3 [shape=record, label="{BB3:\l\l  %4 = load %freelist\l %5 = load %freelist\l %6 = getelementptr %cellspace,  0,  %tmp2\l %7 = getelementptr %6,  0,  1\l %8 = load %7\l %12 = store %8,  %freelist\l br  BB11\l}"];
+	AA3 -> AA11
+	AA9 [shape=record, label="{BB9:\l\l  %13 = @Error()\l br  BB11\l}"];
+	AA9 -> AA11
+	AA11 [shape=record, label="{BB11:\l\l  %temp.0 = phi [  %4, BB3 ], [ 0, BB9 ]\l ret \l}"];
+}

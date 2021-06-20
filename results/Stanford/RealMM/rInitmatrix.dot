@@ -1,0 +1,21 @@
+digraph "CFG for 'rInitmatrix' function" {
+	AA0 [shape=record, label="{BB0:\l\l  br  BB1\l}"];
+	AA0 -> AA1
+	AA1 [shape=record, label="{BB1:\l\l  %i.0 = phi [ 1, BB0 ], [  %20, BB19 ]\l %2 = icmp-sle %i.0,  40\l br %2 BB3 BB21\l}"];
+	AA1 -> AA3
+	AA1 -> AA21
+	AA3 [shape=record, label="{BB3:\l\l  br  BB4\l}"];
+	AA3 -> AA4
+	AA4 [shape=record, label="{BB4:\l\l  %j.0 = phi [ 1, BB3 ], [  %17, BB16 ]\l %5 = icmp-sle %j.0,  40\l br %5 BB6 BB18\l}"];
+	AA4 -> AA6
+	AA4 -> AA18
+	AA6 [shape=record, label="{BB6:\l\l  %7 = call()\l %8 = sdiv %7,  120\l %9 = mul-nsw %8,  120\l %10 = sub-nsw %7,  %9\l %11 = sub-nsw %10,  60\l %12 = sitofp %11\l %13 = fdiv %12,  %\l %14 = getelementptr %m,  %i.0\l %15 = getelementptr %14,  0,  %j.0\l %22 = store %13,  %15\l br  BB16\l}"];
+	AA6 -> AA16
+	AA16 [shape=record, label="{BB16:\l\l  %17 = add-nsw %j.0,  1\l br  BB4\l}"];
+	AA16 -> AA4
+	AA18 [shape=record, label="{BB18:\l\l  br  BB19\l}"];
+	AA18 -> AA19
+	AA19 [shape=record, label="{BB19:\l\l  %20 = add-nsw %i.0,  1\l br  BB1\l}"];
+	AA19 -> AA1
+	AA21 [shape=record, label="{BB21:\l\l  ret void\l}"];
+}

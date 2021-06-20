@@ -1,0 +1,17 @@
+digraph "CFG for 'Trees' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %31 = @tInitarr()\l %2 = call(%malloc)\l %3 = bitcast %2\l %32 = store %3,  %tree\l %4 = load %tree\l %5 = getelementptr %4,  0,  0\l %33 = store %17,  %5\l %6 = load %tree\l %7 = getelementptr %6,  0,  1\l %34 = store %17,  %7\l %8 = load %17\l %9 = load %tree\l %10 = getelementptr %9,  0,  2\l %35 = store %8,  %10\l br  BB11\l}"];
+	AA0 -> AA11
+	AA11 [shape=record, label="{BB11:\l\l  %i.0 = phi [ 2, BB0 ], [  %19, BB18 ]\l %12 = icmp-sle %i.0,  5000\l br %12 BB13 BB20\l}"];
+	AA11 -> AA13
+	AA11 -> AA20
+	AA13 [shape=record, label="{BB13:\l\l  %14 = getelementptr %sortlist,  0,  %i.0\l %15 = load %14\l %16 = load %tree\l %36 = @Insert(%tmp7, %tmp8)\l br  BB18\l}"];
+	AA13 -> AA18
+	AA18 [shape=record, label="{BB18:\l\l  %19 = add-nsw %i.0,  1\l br  BB11\l}"];
+	AA18 -> AA11
+	AA20 [shape=record, label="{BB20:\l\l  %21 = add-nsw 2,  %run\l %22 = getelementptr %sortlist,  0,  %add\l %23 = load %22\l %24 = call @printf(%23)\l %25 = load %tree\l %26 = call(%Checktree)\l %27 = icmp-ne %26,  0\l br %27 BB30 BB28\l}"];
+	AA20 -> AA30
+	AA20 -> AA28
+	AA28 [shape=record, label="{BB28:\l\l  %29 = call @printf()\l br  BB30\l}"];
+	AA28 -> AA30
+	AA30 [shape=record, label="{BB30:\l\l  ret void\l}"];
+}

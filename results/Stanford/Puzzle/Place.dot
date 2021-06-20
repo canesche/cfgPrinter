@@ -1,0 +1,33 @@
+digraph "CFG for 'Place' function" {
+	AA0 [shape=record, label="{BB0:\l\l  br  BB1\l}"];
+	AA0 -> AA1
+	AA1 [shape=record, label="{BB1:\l\l  %k.0 = phi [ 0, BB0 ], [  %15, BB14 ]\l %2 = getelementptr %piecemax,  0,  %i\l %3 = load %2\l %4 = icmp-sle %k.0,  %3\l br %4 BB5 BB16\l}"];
+	AA1 -> AA5
+	AA1 -> AA16
+	AA5 [shape=record, label="{BB5:\l\l  %6 = getelementptr %p,  0,  %i\l %7 = getelementptr %6,  0,  %k.0\l %8 = load %7\l %9 = icmp-ne %8,  0\l br %9 BB10 BB13\l}"];
+	AA5 -> AA10
+	AA5 -> AA13
+	AA10 [shape=record, label="{BB10:\l\l  %11 = add-nsw %j,  %k.0\l %12 = getelementptr %puzzl,  0,  %add\l %37 = store 1,  %12\l br  BB13\l}"];
+	AA10 -> AA13
+	AA13 [shape=record, label="{BB13:\l\l  br  BB14\l}"];
+	AA13 -> AA14
+	AA14 [shape=record, label="{BB14:\l\l  %15 = add-nsw %k.0,  1\l br  BB1\l}"];
+	AA14 -> AA1
+	AA16 [shape=record, label="{BB16:\l\l  %17 = getelementptr %class,  0,  %i\l %18 = load %17\l %19 = getelementptr %piececount,  0,  %tmp10\l %20 = load %19\l %21 = sub-nsw %20,  1\l %22 = getelementptr %class,  0,  %i\l %23 = load %22\l %24 = getelementptr %piececount,  0,  %tmp13\l %38 = store %21,  %24\l br  BB25\l}"];
+	AA16 -> AA25
+	AA25 [shape=record, label="{BB25:\l\l  %k.1 = phi [  %j, BB16 ], [  %34, BB33 ]\l %26 = icmp-sle %k.1,  511\l br %26 BB27 BB35\l}"];
+	AA25 -> AA27
+	AA25 -> AA35
+	AA27 [shape=record, label="{BB27:\l\l  %28 = getelementptr %puzzl,  0,  %k.1\l %29 = load %28\l %30 = icmp-ne %29,  0\l br %30 BB32 BB31\l}"];
+	AA27 -> AA32
+	AA27 -> AA31
+	AA31 [shape=record, label="{BB31:\l\l  br  BB36\l}"];
+	AA31 -> AA36
+	AA32 [shape=record, label="{BB32:\l\l  br  BB33\l}"];
+	AA32 -> AA33
+	AA33 [shape=record, label="{BB33:\l\l  %34 = add-nsw %k.1,  1\l br  BB25\l}"];
+	AA33 -> AA25
+	AA35 [shape=record, label="{BB35:\l\l  br  BB36\l}"];
+	AA35 -> AA36
+	AA36 [shape=record, label="{BB36:\l\l  %retval.0 = phi [  %k.1, BB31 ], [ 0, BB35 ]\l ret \l}"];
+}

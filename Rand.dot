@@ -1,3 +1,0 @@
-digraph "CFG for 'Rand' function" {
-	AA0 [shape=record, label="{BB0:\l\l  %5 = load %seed\l %2 = mul-nsw %5,  1309\l %3 = add-nsw %2,  13849\l %4 = and %3,  65535\l %5 = load %seed\l %6 = trunc %5\l ret \l}"];
-}

@@ -1,0 +1,17 @@
+digraph "CFG for 'Perm' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %16 = store 0,  %pctr\l br  BB1\l}"];
+	AA0 -> AA1
+	AA1 [shape=record, label="{BB1:\l\l  %i.0 = phi [ 1, BB0 ], [  %7, BB6 ]\l %2 = icmp-sle %i.0,  5\l br %2 BB3 BB8\l}"];
+	AA1 -> AA3
+	AA1 -> AA8
+	AA3 [shape=record, label="{BB3:\l\l  %17 = @Initialize()\l %18 = @Permute(7)\l br  BB6\l}"];
+	AA3 -> AA6
+	AA6 [shape=record, label="{BB6:\l\l  %7 = add-nsw %i.0,  1\l br  BB1\l}"];
+	AA6 -> AA1
+	AA8 [shape=record, label="{BB8:\l\l  %9 = load %pctr\l %10 = icmp-ne %9,  43300\l br %10 BB11 BB13\l}"];
+	AA8 -> AA11
+	AA8 -> AA13
+	AA11 [shape=record, label="{BB11:\l\l  %12 = call @printf()\l br  BB13\l}"];
+	AA11 -> AA13
+	AA13 [shape=record, label="{BB13:\l\l  %14 = load %pctr\l %15 = call @printf(%14)\l ret void\l}"];
+}

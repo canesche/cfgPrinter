@@ -11,42 +11,72 @@ if [ ! -e "build" ]; then
     mkdir build
 fi
 
+# Create the results
+if [ ! -e "results" ]; then
+    mkdir results
+fi
+
 echo "Building the cfgPrinter pass"
 cmake -DLLVM_INSTALL_DIR=$LLVM_INSTALL_DIR -G "Unix Makefiles" -B build/ .
 cd build
 cmake --build .
 cd ..
 
-echo "Executing the pass"
-EXAMPLE=examples/file
+echo ""
+echo "Benchmarks toys"
 
+EXAMPLE=benchmarks/test
+
+if [ ! -e "results/test" ]; then
+    mkdir "results/test"
+fi
+
+echo "Executing the pass for bench: "$EXAMPLE
 # analysis pass
-$CLANG -fno-discard-value-names -Xclang -disable-O0-optnone -S -emit-llvm $EXAMPLE".c" -o $EXAMPLE".ll"
+$CLANG -Wno-everything -fno-discard-value-names -Xclang -disable-O0-optnone -S -emit-llvm $EXAMPLE".c" -o $EXAMPLE".ll"
 $OPT -S -mem2reg $EXAMPLE".ll" -o $EXAMPLE"_opt.ll"
-$OPT -load-pass-plugin $PATH_LIB -passes="cfgPrinter" $EXAMPLE"_opt.ll"
+$OPT -load-pass-plugin $PATH_LIB -passes="cfgPrinter" $EXAMPLE"_opt.ll" -disable-output
 
-#$OPT --dot-cfg $EXAMPLE"_opt.ll"
+mv *dot "results/test"
+
+echo ""
+echo "Benchmarks Stanford"
 
 BENCH=(
     Bubblesort
-    #FloatMM
-    #IntMM
-    #Oscar
-    #Perm
-    #Puzzle
-    #Queens
-    #Quicksort
-    #ealMM
-    #Towers
-    #Treesort
+    FloatMM
+    IntMM
+    Oscar
+    Perm
+    Puzzle
+    Queens
+    Quicksort
+    RealMM
+    Towers
+    Treesort
 )
 
 for ((i = 0; i < ${#BENCH[@]}; i++)); do
-    EXAMPLE=examples/${BENCH[i]}
-    $CLANG -fno-discard-value-names -Xclang -disable-O0-optnone -S -emit-llvm Stanford/${BENCH[i]}".c" -o $EXAMPLE".ll"
-    $OPT -S -mem2reg $EXAMPLE".ll" -o $EXAMPLE"_opt.ll"
+	
+    if [ ! -e "results/Stanford" ]; then
+	    mkdir "results/Stanford"
+	fi
+
+	if [ ! -e "results/Stanford/${BENCH[i]}" ]; then
+	    mkdir "results/Stanford/${BENCH[i]}"
+	fi
+
+    echo "Executing the pass for bench: ${BENCH[i]}"
+
+    EXAMPLE=benchmarks/${BENCH[i]}
+    $CLANG -Wno-everything -fno-discard-value-names -Xclang -disable-O0-optnone -S -emit-llvm benchmarks/Stanford/${BENCH[i]}".c" -o $EXAMPLE".ll"
+    $OPT -S -instnamer -mem2reg $EXAMPLE".ll" -o $EXAMPLE"_opt.ll"
     
-    $OPT --dot-cfg $EXAMPLE"_opt.ll"
+    #$OPT --dot-cfg $EXAMPLE"_opt.ll"
     
-    $OPT -load-pass-plugin $PATH_LIB -passes="cfgPrinter" $EXAMPLE"_opt.ll"
+    $OPT -load-pass-plugin $PATH_LIB -passes="cfgPrinter" $EXAMPLE"_opt.ll" -disable-output
+    
+    mv *.dot "results/Stanford/${BENCH[i]}"
 done
+
+rm benchmarks/*.ll

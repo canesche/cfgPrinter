@@ -1,0 +1,24 @@
+digraph "CFG for 'Cos' function" {
+	AA0 [shape=record, label="{BB0:\l\l  br  BB1\l}"];
+	AA0 -> AA1
+	AA1 [shape=record, label="{BB1:\l\l  %result.0 = phi [  %, BB0 ], [  %result.2, BB21 ]\l %factor.0 = phi [ 1, BB0 ], [  %4, BB21 ]\l %i.0 = phi [ 2, BB0 ], [  %22, BB21 ]\l %power.0 = phi [  %x, BB0 ], [  %5, BB21 ]\l %2 = icmp-sle %i.0,  10\l br %2 BB3 BB23\l}"];
+	AA1 -> AA3
+	AA1 -> AA23
+	AA3 [shape=record, label="{BB3:\l\l  %4 = mul-nsw %factor.0,  %i.0\l %5 = fmul %power.0,  %x\l %6 = and %i.0,  1\l %7 = icmp-eq %6,  0\l br %7 BB8 BB20\l}"];
+	AA3 -> AA8
+	AA3 -> AA20
+	AA8 [shape=record, label="{BB8:\l\l  %9 = and %i.0,  3\l %10 = icmp-eq %9,  0\l br %10 BB11 BB15\l}"];
+	AA8 -> AA11
+	AA8 -> AA15
+	AA11 [shape=record, label="{BB11:\l\l  %12 = sitofp %4\l %13 = fdiv %5,  %12\l %14 = fadd %result.0,  %13\l br  BB19\l}"];
+	AA11 -> AA19
+	AA15 [shape=record, label="{BB15:\l\l  %16 = sitofp %4\l %17 = fdiv %5,  %16\l %18 = fsub %result.0,  %17\l br  BB19\l}"];
+	AA15 -> AA19
+	AA19 [shape=record, label="{BB19:\l\l  %result.1 = phi [  %14, BB11 ], [  %18, BB15 ]\l br  BB20\l}"];
+	AA19 -> AA20
+	AA20 [shape=record, label="{BB20:\l\l  %result.2 = phi [  %result.1, BB19 ], [  %result.0, BB3 ]\l br  BB21\l}"];
+	AA20 -> AA21
+	AA21 [shape=record, label="{BB21:\l\l  %22 = add-nsw %i.0,  1\l br  BB1\l}"];
+	AA21 -> AA1
+	AA23 [shape=record, label="{BB23:\l\l  ret \l}"];
+}

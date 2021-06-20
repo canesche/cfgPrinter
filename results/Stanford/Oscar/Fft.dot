@@ -1,0 +1,40 @@
+digraph "CFG for 'Fft' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = sdiv %n,  2\l br  BB2\l}"];
+	AA0 -> AA2
+	AA2 [shape=record, label="{BB2:\l\l  %l.0 = phi [ 1, BB0 ], [  %105, BB106 ]\l br  BB3\l}"];
+	AA2 -> AA3
+	AA3 [shape=record, label="{BB3:\l\l  %i.0 = phi [ 1, BB2 ], [  %87, BB92 ]\l %j.0 = phi [  %l.0, BB2 ], [  %91, BB92 ]\l %k.0 = phi [ 0, BB2 ], [  %j.0, BB92 ]\l br  BB4\l}"];
+	AA3 -> AA4
+	AA4 [shape=record, label="{BB4:\l\l  %i.1 = phi [  %i.0, BB3 ], [  %87, BB88 ]\l %5 = getelementptr %z,  %i.1\l %6 = getelementptr %5,  0,  0\l %7 = load %6\l %8 = add-nsw %1,  %i.1\l %9 = getelementptr %z,  %add\l %10 = getelementptr %9,  0,  0\l %11 = load %10\l %12 = fadd %7,  %11\l %13 = add-nsw %i.1,  %k.0\l %14 = getelementptr %w,  %add7\l %15 = getelementptr %14,  0,  0\l %128 = store %12,  %15\l %16 = getelementptr %z,  %i.1\l %17 = getelementptr %16,  0,  1\l %18 = load %17\l %19 = add-nsw %1,  %i.1\l %20 = getelementptr %z,  %add13\l %21 = getelementptr %20,  0,  1\l %22 = load %21\l %23 = fadd %18,  %22\l %24 = add-nsw %i.1,  %k.0\l %25 = getelementptr %w,  %add18\l %26 = getelementptr %25,  0,  1\l %129 = store %23,  %26\l %27 = add-nsw %k.0,  1\l %28 = getelementptr %e,  %add22\l %29 = getelementptr %28,  0,  0\l %30 = load %29\l %31 = getelementptr %z,  %i.1\l %32 = getelementptr %31,  0,  0\l %33 = load %32\l %34 = add-nsw %i.1,  %1\l %35 = getelementptr %z,  %add29\l %36 = getelementptr %35,  0,  0\l %37 = load %36\l %38 = fsub %33,  %37\l %39 = fmul %30,  %38\l %40 = add-nsw %k.0,  1\l %41 = getelementptr %e,  %add33\l %42 = getelementptr %41,  0,  1\l %43 = load %42\l %44 = getelementptr %z,  %i.1\l %45 = getelementptr %44,  0,  1\l %46 = load %45\l %47 = add-nsw %i.1,  %1\l %48 = getelementptr %z,  %add40\l %49 = getelementptr %48,  0,  1\l %50 = load %49\l %51 = fsub %46,  %50\l %52 = fmul %43,  %51\l %53 = fsub %39,  %52\l %54 = add-nsw %i.1,  %j.0\l %55 = getelementptr %w,  %add47\l %56 = getelementptr %55,  0,  0\l %130 = store %53,  %56\l %57 = add-nsw %k.0,  1\l %58 = getelementptr %e,  %add51\l %59 = getelementptr %58,  0,  0\l %60 = load %59\l %61 = getelementptr %z,  %i.1\l %62 = getelementptr %61,  0,  1\l %63 = load %62\l %64 = add-nsw %i.1,  %1\l %65 = getelementptr %z,  %add58\l %66 = getelementptr %65,  0,  1\l %67 = load %66\l %68 = fsub %63,  %67\l %69 = fmul %60,  %68\l %70 = add-nsw %k.0,  1\l %71 = getelementptr %e,  %add64\l %72 = getelementptr %71,  0,  1\l %73 = load %72\l %74 = getelementptr %z,  %i.1\l %75 = getelementptr %74,  0,  0\l %76 = load %75\l %77 = add-nsw %i.1,  %1\l %78 = getelementptr %z,  %add71\l %79 = getelementptr %78,  0,  0\l %80 = load %79\l %81 = fsub %76,  %80\l %82 = fmul %73,  %81\l %83 = fadd %69,  %82\l %84 = add-nsw %i.1,  %j.0\l %85 = getelementptr %w,  %add78\l %86 = getelementptr %85,  0,  1\l %131 = store %83,  %86\l %87 = add-nsw %i.1,  1\l br  BB88\l}"];
+	AA4 -> AA88
+	AA88 [shape=record, label="{BB88:\l\l  %89 = icmp-sle %87,  %j.0\l br %89 BB4 BB90\l}"];
+	AA88 -> AA4
+	AA88 -> AA90
+	AA90 [shape=record, label="{BB90:\l\l  %91 = add-nsw %j.0,  %l.0\l br  BB92\l}"];
+	AA90 -> AA92
+	AA92 [shape=record, label="{BB92:\l\l  %93 = icmp-sle %91,  %1\l br %93 BB3 BB94\l}"];
+	AA92 -> AA3
+	AA92 -> AA94
+	AA94 [shape=record, label="{BB94:\l\l  br  BB95\l}"];
+	AA94 -> AA95
+	AA95 [shape=record, label="{BB95:\l\l  %index.0 = phi [ 1, BB94 ], [  %101, BB102 ]\l %96 = getelementptr %z,  %index.0\l %97 = getelementptr %w,  %index.0\l %98 = bitcast %96\l %99 = bitcast %97\l %132 = @llvm.memcpy.p0i8.p0i8.i64(%tmp80, %tmp81, 8, 0)\l %101 = add-nsw %index.0,  1\l br  BB102\l}"];
+	AA95 -> AA102
+	AA102 [shape=record, label="{BB102:\l\l  %103 = icmp-sle %101,  %n\l br %103 BB95 BB104\l}"];
+	AA102 -> AA95
+	AA102 -> AA104
+	AA104 [shape=record, label="{BB104:\l\l  %105 = add-nsw %l.0,  %l.0\l br  BB106\l}"];
+	AA104 -> AA106
+	AA106 [shape=record, label="{BB106:\l\l  %107 = icmp-sle %105,  %1\l br %107 BB2 BB108\l}"];
+	AA106 -> AA2
+	AA106 -> AA108
+	AA108 [shape=record, label="{BB108:\l\l  br  BB109\l}"];
+	AA108 -> AA109
+	AA109 [shape=record, label="{BB109:\l\l  %i.2 = phi [ 1, BB108 ], [  %126, BB125 ]\l %110 = icmp-sle %i.2,  %n\l br %110 BB111 BB127\l}"];
+	AA109 -> AA111
+	AA109 -> AA127
+	AA111 [shape=record, label="{BB111:\l\l  %112 = getelementptr %z,  %i.2\l %113 = getelementptr %112,  0,  0\l %114 = load %113\l %115 = fmul %sqrinv,  %114\l %116 = getelementptr %z,  %i.2\l %117 = getelementptr %116,  0,  0\l %133 = store %115,  %117\l %118 = fneg %sqrinv\l %119 = getelementptr %z,  %i.2\l %120 = getelementptr %119,  0,  1\l %121 = load %120\l %122 = fmul %118,  %121\l %123 = getelementptr %z,  %i.2\l %124 = getelementptr %123,  0,  1\l %134 = store %122,  %124\l br  BB125\l}"];
+	AA111 -> AA125
+	AA125 [shape=record, label="{BB125:\l\l  %126 = add-nsw %i.2,  1\l br  BB109\l}"];
+	AA125 -> AA109
+	AA127 [shape=record, label="{BB127:\l\l  ret void\l}"];
+}

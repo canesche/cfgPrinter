@@ -1,0 +1,24 @@
+digraph "CFG for 'Fit' function" {
+	AA0 [shape=record, label="{BB0:\l\l  br  BB1\l}"];
+	AA0 -> AA1
+	AA1 [shape=record, label="{BB1:\l\l  %k.0 = phi [ 0, BB0 ], [  %19, BB18 ]\l %2 = getelementptr %piecemax,  0,  %i\l %3 = load %2\l %4 = icmp-sle %k.0,  %3\l br %4 BB5 BB20\l}"];
+	AA1 -> AA5
+	AA1 -> AA20
+	AA5 [shape=record, label="{BB5:\l\l  %6 = getelementptr %p,  0,  %i\l %7 = getelementptr %6,  0,  %k.0\l %8 = load %7\l %9 = icmp-ne %8,  0\l br %9 BB10 BB17\l}"];
+	AA5 -> AA10
+	AA5 -> AA17
+	AA10 [shape=record, label="{BB10:\l\l  %11 = add-nsw %j,  %k.0\l %12 = getelementptr %puzzl,  0,  %add\l %13 = load %12\l %14 = icmp-ne %13,  0\l br %14 BB15 BB16\l}"];
+	AA10 -> AA15
+	AA10 -> AA16
+	AA15 [shape=record, label="{BB15:\l\l  br  BB21\l}"];
+	AA15 -> AA21
+	AA16 [shape=record, label="{BB16:\l\l  br  BB17\l}"];
+	AA16 -> AA17
+	AA17 [shape=record, label="{BB17:\l\l  br  BB18\l}"];
+	AA17 -> AA18
+	AA18 [shape=record, label="{BB18:\l\l  %19 = add-nsw %k.0,  1\l br  BB1\l}"];
+	AA18 -> AA1
+	AA20 [shape=record, label="{BB20:\l\l  br  BB21\l}"];
+	AA20 -> AA21
+	AA21 [shape=record, label="{BB21:\l\l  %retval.0 = phi [ 0, BB15 ], [ 1, BB20 ]\l ret \l}"];
+}

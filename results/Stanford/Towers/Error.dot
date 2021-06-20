@@ -1,0 +1,3 @@
+digraph "CFG for 'Error' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = call @printf(%emsg)\l ret void\l}"];
+}

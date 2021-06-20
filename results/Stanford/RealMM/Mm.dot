@@ -1,0 +1,21 @@
+digraph "CFG for 'Mm' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %25 = @Initrand()\l %26 = @rInitmatrix()\l %27 = @rInitmatrix()\l br  BB4\l}"];
+	AA0 -> AA4
+	AA4 [shape=record, label="{BB4:\l\l  %i.0 = phi [ 1, BB0 ], [  %17, BB16 ]\l %5 = icmp-sle %i.0,  40\l br %5 BB6 BB18\l}"];
+	AA4 -> AA6
+	AA4 -> AA18
+	AA6 [shape=record, label="{BB6:\l\l  br  BB7\l}"];
+	AA6 -> AA7
+	AA7 [shape=record, label="{BB7:\l\l  %j.0 = phi [ 1, BB6 ], [  %14, BB13 ]\l %8 = icmp-sle %j.0,  40\l br %8 BB9 BB15\l}"];
+	AA7 -> AA9
+	AA7 -> AA15
+	AA9 [shape=record, label="{BB9:\l\l  %10 = getelementptr %rmr,  0,  %i.0\l %11 = getelementptr %10,  0,  %j.0\l %28 = @rInnerproduct(%arrayidx5, %i.0, %j.0)\l br  BB13\l}"];
+	AA9 -> AA13
+	AA13 [shape=record, label="{BB13:\l\l  %14 = add-nsw %j.0,  1\l br  BB7\l}"];
+	AA13 -> AA7
+	AA15 [shape=record, label="{BB15:\l\l  br  BB16\l}"];
+	AA15 -> AA16
+	AA16 [shape=record, label="{BB16:\l\l  %17 = add-nsw %i.0,  1\l br  BB4\l}"];
+	AA16 -> AA4
+	AA18 [shape=record, label="{BB18:\l\l  %19 = add-nsw %run,  1\l %20 = getelementptr %rmr,  0,  %add\l %21 = add-nsw %run,  1\l %22 = getelementptr %20,  0,  %add11\l %23 = load %22\l %24 = call @printf(%23)\l ret void\l}"];
+}

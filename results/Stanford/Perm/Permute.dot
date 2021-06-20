@@ -1,0 +1,17 @@
+digraph "CFG for 'Permute' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = load %pctr\l %2 = add %1,  1\l %23 = store %2,  %pctr\l %3 = icmp-ne %n,  1\l br %3 BB4 BB22\l}"];
+	AA0 -> AA4
+	AA0 -> AA22
+	AA4 [shape=record, label="{BB4:\l\l  %5 = sub-nsw %n,  1\l %24 = @Permute(%sub)\l %7 = sub-nsw %n,  1\l br  BB8\l}"];
+	AA4 -> AA8
+	AA8 [shape=record, label="{BB8:\l\l  %k.0 = phi [  %7, BB4 ], [  %20, BB19 ]\l %9 = icmp-sge %k.0,  1\l br %9 BB10 BB21\l}"];
+	AA8 -> AA10
+	AA8 -> AA21
+	AA10 [shape=record, label="{BB10:\l\l  %11 = getelementptr %permarray,  0,  %n\l %12 = getelementptr %permarray,  0,  %k.0\l %25 = @Swap(%arrayidx, %arrayidx4)\l %14 = sub-nsw %n,  1\l %26 = @Permute(%sub5)\l %16 = getelementptr %permarray,  0,  %n\l %17 = getelementptr %permarray,  0,  %k.0\l %27 = @Swap(%arrayidx7, %arrayidx9)\l br  BB19\l}"];
+	AA10 -> AA19
+	AA19 [shape=record, label="{BB19:\l\l  %20 = add-nsw %k.0,  4294967295\l br  BB8\l}"];
+	AA19 -> AA8
+	AA21 [shape=record, label="{BB21:\l\l  br  BB22\l}"];
+	AA21 -> AA22
+	AA22 [shape=record, label="{BB22:\l\l  ret void\l}"];
+}

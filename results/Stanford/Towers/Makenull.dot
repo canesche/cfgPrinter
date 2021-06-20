@@ -1,0 +1,3 @@
+digraph "CFG for 'Makenull' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = getelementptr %stack,  0,  %s\l %2 = store 0,  %1\l ret void\l}"];
+}

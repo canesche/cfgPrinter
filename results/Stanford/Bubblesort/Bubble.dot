@@ -1,0 +1,30 @@
+digraph "CFG for 'Bubble' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %45 = @bInitarr()\l %46 = store 500,  %top\l br  BB2\l}"];
+	AA0 -> AA2
+	AA2 [shape=record, label="{BB2:\l\l  %3 = load %top\l %4 = icmp-sgt %3,  1\l br %4 BB5 BB30\l}"];
+	AA2 -> AA5
+	AA2 -> AA30
+	AA5 [shape=record, label="{BB5:\l\l  br  BB6\l}"];
+	AA5 -> AA6
+	AA6 [shape=record, label="{BB6:\l\l  %i.0 = phi [ 1, BB5 ], [  %26, BB25 ]\l %7 = load %top\l %8 = icmp-slt %i.0,  %7\l br %8 BB9 BB27\l}"];
+	AA6 -> AA9
+	AA6 -> AA27
+	AA9 [shape=record, label="{BB9:\l\l  %10 = getelementptr %sortlist,  0,  %i.0\l %11 = load %10\l %12 = add-nsw %i.0,  1\l %13 = getelementptr %sortlist,  0,  %add\l %14 = load %13\l %15 = icmp-sgt %11,  %14\l br %15 BB16 BB25\l}"];
+	AA9 -> AA16
+	AA9 -> AA25
+	AA16 [shape=record, label="{BB16:\l\l  %17 = getelementptr %sortlist,  0,  %i.0\l %18 = load %17\l %19 = add-nsw %i.0,  1\l %20 = getelementptr %sortlist,  0,  %add9\l %21 = load %20\l %22 = getelementptr %sortlist,  0,  %i.0\l %47 = store %21,  %22\l %23 = add-nsw %i.0,  1\l %24 = getelementptr %sortlist,  0,  %add14\l %48 = store %18,  %24\l br  BB25\l}"];
+	AA16 -> AA25
+	AA25 [shape=record, label="{BB25:\l\l  %26 = add-nsw %i.0,  1\l br  BB6\l}"];
+	AA25 -> AA6
+	AA27 [shape=record, label="{BB27:\l\l  %28 = load %top\l %29 = sub-nsw %28,  1\l %49 = store %29,  %top\l br  BB2\l}"];
+	AA27 -> AA2
+	AA30 [shape=record, label="{BB30:\l\l  %31 = load %1\l %32 = load %littlest\l %33 = icmp-ne %31,  %32\l br %33 BB38 BB34\l}"];
+	AA30 -> AA38
+	AA30 -> AA34
+	AA34 [shape=record, label="{BB34:\l\l  %35 = load %1\l %36 = load %biggest\l %37 = icmp-ne %35,  %36\l br %37 BB38 BB40\l}"];
+	AA34 -> AA38
+	AA34 -> AA40
+	AA38 [shape=record, label="{BB38:\l\l  %39 = call @printf()\l br  BB40\l}"];
+	AA38 -> AA40
+	AA40 [shape=record, label="{BB40:\l\l  %41 = add-nsw %run,  1\l %42 = getelementptr %sortlist,  0,  %add23\l %43 = load %42\l %44 = call @printf(%43)\l ret void\l}"];
+}

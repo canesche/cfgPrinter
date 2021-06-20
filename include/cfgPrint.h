@@ -32,6 +32,7 @@ namespace cfgPrint {
         string getName(const Value *v); 
 
         void get_map_label(Function &F);
+        void create_file(Function &F);
         void BrNode(BasicBlock::iterator I, vector<string> &target);
         void PhiNode(BasicBlock::iterator I);
         void RetNode(BasicBlock::iterator I);

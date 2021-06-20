@@ -1,0 +1,29 @@
+digraph "CFG for 'Insert' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = getelementptr %t,  0,  2\l %2 = load %1\l %3 = icmp-sgt %n,  %2\l br %3 BB4 BB16\l}"];
+	AA0 -> AA4
+	AA0 -> AA16
+	AA4 [shape=record, label="{BB4:\l\l  %5 = getelementptr %t,  0,  0\l %6 = load %5\l %7 = icmp-eq %6,  %30\l br %7 BB8 BB11\l}"];
+	AA4 -> AA8
+	AA4 -> AA11
+	AA8 [shape=record, label="{BB8:\l\l  %9 = getelementptr %t,  0,  0\l %34 = @CreateNode(%left3, %n)\l br  BB15\l}"];
+	AA8 -> AA15
+	AA11 [shape=record, label="{BB11:\l\l  %12 = getelementptr %t,  0,  0\l %13 = load %12\l %35 = @Insert(%n, %tmp9)\l br  BB15\l}"];
+	AA11 -> AA15
+	AA15 [shape=record, label="{BB15:\l\l  br  BB33\l}"];
+	AA15 -> AA33
+	AA16 [shape=record, label="{BB16:\l\l  %17 = getelementptr %t,  0,  2\l %18 = load %17\l %19 = icmp-slt %n,  %18\l br %19 BB20 BB32\l}"];
+	AA16 -> AA20
+	AA16 -> AA32
+	AA20 [shape=record, label="{BB20:\l\l  %21 = getelementptr %t,  0,  1\l %22 = load %21\l %23 = icmp-eq %22,  %30\l br %23 BB24 BB27\l}"];
+	AA20 -> AA24
+	AA20 -> AA27
+	AA24 [shape=record, label="{BB24:\l\l  %25 = getelementptr %t,  0,  1\l %36 = @CreateNode(%right11, %n)\l br  BB31\l}"];
+	AA24 -> AA31
+	AA27 [shape=record, label="{BB27:\l\l  %28 = getelementptr %t,  0,  1\l %29 = load %28\l %37 = @Insert(%n, %tmp19)\l br  BB31\l}"];
+	AA27 -> AA31
+	AA31 [shape=record, label="{BB31:\l\l  br  BB32\l}"];
+	AA31 -> AA32
+	AA32 [shape=record, label="{BB32:\l\l  br  BB33\l}"];
+	AA32 -> AA33
+	AA33 [shape=record, label="{BB33:\l\l  ret void\l}"];
+}

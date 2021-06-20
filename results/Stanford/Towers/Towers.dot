@@ -1,0 +1,17 @@
+digraph "CFG for 'Towers' function" {
+	AA0 [shape=record, label="{BB0:\l\l  br  BB1\l}"];
+	AA0 -> AA1
+	AA1 [shape=record, label="{BB1:\l\l  %i.0 = phi [ 1, BB0 ], [  %8, BB7 ]\l %2 = icmp-sle %i.0,  18\l br %2 BB3 BB9\l}"];
+	AA1 -> AA3
+	AA1 -> AA9
+	AA3 [shape=record, label="{BB3:\l\l  %4 = sub-nsw %i.0,  1\l %5 = getelementptr %cellspace,  0,  %i.0\l %6 = getelementptr %5,  0,  1\l %21 = store %4,  %6\l br  BB7\l}"];
+	AA3 -> AA7
+	AA7 [shape=record, label="{BB7:\l\l  %8 = add-nsw %i.0,  1\l br  BB1\l}"];
+	AA7 -> AA1
+	AA9 [shape=record, label="{BB9:\l\l  %22 = store 18,  %freelist\l %23 = @Init(1, 14)\l %24 = @Makenull(2)\l %25 = @Makenull(3)\l %26 = store 0,  %movesdone\l %27 = @tower(1, 2, 14)\l %14 = load %movesdone\l %15 = icmp-ne %14,  16383\l br %15 BB16 BB18\l}"];
+	AA9 -> AA16
+	AA9 -> AA18
+	AA16 [shape=record, label="{BB16:\l\l  %17 = call @printf()\l br  BB18\l}"];
+	AA16 -> AA18
+	AA18 [shape=record, label="{BB18:\l\l  %19 = load %movesdone\l %20 = call @printf(%19)\l ret void\l}"];
+}

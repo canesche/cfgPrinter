@@ -1,0 +1,21 @@
+digraph "CFG for 'Oscar' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = alloca 1\l %33 = @Exptab(256, )\l %34 = store 5767,  %seed\l br  BB3\l}"];
+	AA0 -> AA3
+	AA3 [shape=record, label="{BB3:\l\l  %i.0 = phi [ 1, BB0 ], [  %23, BB22 ]\l %4 = icmp-sle %i.0,  256\l br %4 BB5 BB24\l}"];
+	AA3 -> AA5
+	AA3 -> AA24
+	AA5 [shape=record, label="{BB5:\l\l  %6 = load %seed\l %7 = trunc %6\l %35 = store %7,  %1\l %36 = @Uniform11(%s, %zr)\l %9 = load %1\l %37 = store %tmp2,  %seed\l %38 = @Uniform11(%s, %zi)\l %11 = load %1\l %39 = store %tmp3,  %seed\l %12 = load %zr\l %13 = fmul %32,  %12\l %14 = fsub %13,  %32\l %15 = getelementptr %z,  0,  %i.0\l %16 = getelementptr %15,  0,  0\l %40 = store %14,  %16\l %17 = load %zi\l %18 = fmul %32,  %17\l %19 = fsub %18,  %32\l %20 = getelementptr %z,  0,  %i.0\l %21 = getelementptr %20,  0,  1\l %41 = store %19,  %21\l br  BB22\l}"];
+	AA5 -> AA22
+	AA22 [shape=record, label="{BB22:\l\l  %23 = add-nsw %i.0,  1\l br  BB3\l}"];
+	AA22 -> AA3
+	AA24 [shape=record, label="{BB24:\l\l  br  BB25\l}"];
+	AA24 -> AA25
+	AA25 [shape=record, label="{BB25:\l\l  %i.1 = phi [ 1, BB24 ], [  %30, BB29 ]\l %26 = icmp-sle %i.1,  20\l br %26 BB27 BB31\l}"];
+	AA25 -> AA27
+	AA25 -> AA31
+	AA27 [shape=record, label="{BB27:\l\l  %42 = @Fft(256, )\l br  BB29\l}"];
+	AA27 -> AA29
+	AA29 [shape=record, label="{BB29:\l\l  %30 = add-nsw %i.1,  1\l br  BB25\l}"];
+	AA29 -> AA25
+	AA31 [shape=record, label="{BB31:\l\l  %43 = @Printcomplex(1, 256, 17)\l ret void\l}"];
+}

@@ -1,0 +1,10 @@
+digraph "CFG for 'Printcomplex' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = call @printf()\l br  BB2\l}"];
+	AA0 -> AA2
+	AA2 [shape=record, label="{BB2:\l\l  %i.0 = phi [  %start, BB0 ], [  %23, BB24 ]\l %3 = getelementptr %zarray,  %i.0\l %4 = getelementptr %3,  0,  0\l %5 = load %4\l %6 = fpext %5\l %7 = getelementptr %zarray,  %i.0\l %8 = getelementptr %7,  0,  1\l %9 = load %8\l %10 = fpext %9\l %11 = call @printf(%10%6)\l %12 = add-nsw %i.0,  %increment\l %13 = getelementptr %zarray,  %add\l %14 = getelementptr %13,  0,  0\l %15 = load %14\l %16 = fpext %15\l %17 = getelementptr %zarray,  %add\l %18 = getelementptr %17,  0,  1\l %19 = load %18\l %20 = fpext %19\l %21 = call @printf(%20%16)\l %22 = call @printf()\l %23 = add-nsw %12,  %increment\l br  BB24\l}"];
+	AA2 -> AA24
+	AA24 [shape=record, label="{BB24:\l\l  %25 = icmp-sle %23,  %finish\l br %25 BB2 BB26\l}"];
+	AA24 -> AA2
+	AA24 -> AA26
+	AA26 [shape=record, label="{BB26:\l\l  ret void\l}"];
+}

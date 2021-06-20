@@ -1,0 +1,37 @@
+digraph "CFG for 'Checktree' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = getelementptr %p,  0,  0\l %2 = load %1\l %3 = icmp-ne %2,  %30\l br %3 BB4 BB23\l}"];
+	AA0 -> AA4
+	AA0 -> AA23
+	AA4 [shape=record, label="{BB4:\l\l  %5 = getelementptr %p,  0,  0\l %6 = load %5\l %7 = getelementptr %6,  0,  2\l %8 = load %7\l %9 = getelementptr %p,  0,  2\l %10 = load %9\l %11 = icmp-sle %8,  %10\l br %11 BB12 BB13\l}"];
+	AA4 -> AA12
+	AA4 -> AA13
+	AA12 [shape=record, label="{BB12:\l\l  br  BB22\l}"];
+	AA12 -> AA22
+	AA13 [shape=record, label="{BB13:\l\l  %14 = getelementptr %p,  0,  0\l %15 = load %14\l %16 = call(%Checktree)\l %17 = icmp-ne %16,  0\l br %17 BB18 BB20\l}"];
+	AA13 -> AA18
+	AA13 -> AA20
+	AA18 [shape=record, label="{BB18:\l\l  %19 = icmp-ne 1,  0\l br  BB20\l}"];
+	AA18 -> AA20
+	AA20 [shape=record, label="{BB20:\l\l  %tmp10 = phi [ 0, BB13 ], [  %19, BB18 ]\l %21 = zext %21\l br  BB22\l}"];
+	AA20 -> AA22
+	AA22 [shape=record, label="{BB22:\l\l  %result.0 = phi [ 0, BB12 ], [  %21, BB20 ]\l br  BB23\l}"];
+	AA22 -> AA23
+	AA23 [shape=record, label="{BB23:\l\l  %result.1 = phi [  %result.0, BB22 ], [ 1, BB0 ]\l %24 = getelementptr %p,  0,  1\l %25 = load %24\l %26 = icmp-ne %25,  %30\l br %26 BB27 BB46\l}"];
+	AA23 -> AA27
+	AA23 -> AA46
+	AA27 [shape=record, label="{BB27:\l\l  %28 = getelementptr %p,  0,  1\l %29 = load %28\l %30 = getelementptr %29,  0,  2\l %31 = load %30\l %32 = getelementptr %p,  0,  2\l %33 = load %32\l %34 = icmp-sge %31,  %33\l br %34 BB35 BB36\l}"];
+	AA27 -> AA35
+	AA27 -> AA36
+	AA35 [shape=record, label="{BB35:\l\l  br  BB45\l}"];
+	AA35 -> AA45
+	AA36 [shape=record, label="{BB36:\l\l  %37 = getelementptr %p,  0,  1\l %38 = load %37\l %39 = call(%Checktree)\l %40 = icmp-ne %39,  0\l br %40 BB41 BB43\l}"];
+	AA36 -> AA41
+	AA36 -> AA43
+	AA41 [shape=record, label="{BB41:\l\l  %42 = icmp-ne %result.1,  0\l br  BB43\l}"];
+	AA41 -> AA43
+	AA43 [shape=record, label="{BB43:\l\l  %tmp21 = phi [ 0, BB36 ], [  %42, BB41 ]\l %44 = zext %tmp21\l br  BB45\l}"];
+	AA43 -> AA45
+	AA45 [shape=record, label="{BB45:\l\l  %result.2 = phi [ 0, BB35 ], [  %44, BB43 ]\l br  BB46\l}"];
+	AA45 -> AA46
+	AA46 [shape=record, label="{BB46:\l\l  %result.3 = phi [  %result.2, BB45 ], [  %result.1, BB23 ]\l ret \l}"];
+}

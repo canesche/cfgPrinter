@@ -1,0 +1,10 @@
+digraph "CFG for 'Min0' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = icmp-slt %arg1,  %arg2\l br %1 BB2 BB3\l}"];
+	AA0 -> AA2
+	AA0 -> AA3
+	AA2 [shape=record, label="{BB2:\l\l  br  BB4\l}"];
+	AA2 -> AA4
+	AA3 [shape=record, label="{BB3:\l\l  br  BB4\l}"];
+	AA3 -> AA4
+	AA4 [shape=record, label="{BB4:\l\l  %retval.0 = phi [  %arg1, BB2 ], [  %arg2, BB3 ]\l ret \l}"];
+}

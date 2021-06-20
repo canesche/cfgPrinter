@@ -1,0 +1,3 @@
+digraph "CFG for 'Swap' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = load %a\l %2 = load %b\l %3 = store %2,  %a\l %4 = store %1,  %b\l ret void\l}"];
+}

@@ -1,0 +1,10 @@
+digraph "CFG for 'tower' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = icmp-eq %k,  1\l br %1 BB2 BB4\l}"];
+	AA0 -> AA2
+	AA0 -> AA4
+	AA2 [shape=record, label="{BB2:\l\l  %13 = @Move(%i, %j)\l br  BB12\l}"];
+	AA2 -> AA12
+	AA4 [shape=record, label="{BB4:\l\l  %5 = sub-nsw 6,  %i\l %6 = sub-nsw %5,  %j\l %7 = sub-nsw %k,  1\l %14 = @tower(%i, %sub1, %sub2)\l %15 = @Move(%i, %j)\l %10 = sub-nsw %k,  1\l %16 = @tower(%sub1, %j, %sub3)\l br  BB12\l}"];
+	AA4 -> AA12
+	AA12 [shape=record, label="{BB12:\l\l  ret void\l}"];
+}

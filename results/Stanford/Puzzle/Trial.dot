@@ -1,0 +1,34 @@
+digraph "CFG for 'Trial' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = load %kount\l %2 = add-nsw %1,  1\l %30 = store %2,  %kount\l br  BB3\l}"];
+	AA0 -> AA3
+	AA3 [shape=record, label="{BB3:\l\l  %i.0 = phi [ 0, BB0 ], [  %27, BB26 ]\l %4 = icmp-sle %i.0,  12\l br %4 BB5 BB28\l}"];
+	AA3 -> AA5
+	AA3 -> AA28
+	AA5 [shape=record, label="{BB5:\l\l  %6 = getelementptr %class,  0,  %i.0\l %7 = load %6\l %8 = getelementptr %piececount,  0,  %tmp3\l %9 = load %8\l %10 = icmp-ne %9,  0\l br %10 BB11 BB25\l}"];
+	AA5 -> AA11
+	AA5 -> AA25
+	AA11 [shape=record, label="{BB11:\l\l  %12 = call(%Fit%j)\l %13 = icmp-ne %12,  0\l br %13 BB14 BB24\l}"];
+	AA11 -> AA14
+	AA11 -> AA24
+	AA14 [shape=record, label="{BB14:\l\l  %15 = call(%Place%j)\l %16 = call(%Trial)\l %17 = icmp-ne %16,  0\l br %17 BB20 BB18\l}"];
+	AA14 -> AA20
+	AA14 -> AA18
+	AA18 [shape=record, label="{BB18:\l\l  %19 = icmp-eq %15,  0\l br %19 BB20 BB21\l}"];
+	AA18 -> AA20
+	AA18 -> AA21
+	AA20 [shape=record, label="{BB20:\l\l  br  BB29\l}"];
+	AA20 -> AA29
+	AA21 [shape=record, label="{BB21:\l\l  %31 = @Remove(%i.0, %j)\l br  BB23\l}"];
+	AA21 -> AA23
+	AA23 [shape=record, label="{BB23:\l\l  br  BB24\l}"];
+	AA23 -> AA24
+	AA24 [shape=record, label="{BB24:\l\l  br  BB25\l}"];
+	AA24 -> AA25
+	AA25 [shape=record, label="{BB25:\l\l  br  BB26\l}"];
+	AA25 -> AA26
+	AA26 [shape=record, label="{BB26:\l\l  %27 = add-nsw %i.0,  1\l br  BB3\l}"];
+	AA26 -> AA3
+	AA28 [shape=record, label="{BB28:\l\l  br  BB29\l}"];
+	AA28 -> AA29
+	AA29 [shape=record, label="{BB29:\l\l  %retval.0 = phi [ 1, BB20 ], [ 0, BB28 ]\l ret \l}"];
+}

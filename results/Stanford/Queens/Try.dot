@@ -1,0 +1,38 @@
+digraph "CFG for 'Try' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %49 = store 0,  %q\l br  BB1\l}"];
+	AA0 -> AA1
+	AA1 [shape=record, label="{BB1:\l\l  %j.0 = phi [ 0, BB0 ], [  %8, BB47 ]\l %2 = load %q\l %3 = icmp-ne %2,  0\l br %3 BB6 BB4\l}"];
+	AA1 -> AA6
+	AA1 -> AA4
+	AA4 [shape=record, label="{BB4:\l\l  %5 = icmp-ne %j.0,  8\l br  BB6\l}"];
+	AA4 -> AA6
+	AA6 [shape=record, label="{BB6:\l\l  %tmp4 = phi [ 0, BB1 ], [  %5, BB4 ]\l br %tmp4 BB7 BB48\l}"];
+	AA6 -> AA7
+	AA6 -> AA48
+	AA7 [shape=record, label="{BB7:\l\l  %8 = add-nsw %j.0,  1\l %50 = store 0,  %q\l %9 = getelementptr %b,  %add\l %10 = load %9\l %11 = icmp-ne %10,  0\l br %11 BB12 BB47\l}"];
+	AA7 -> AA12
+	AA7 -> AA47
+	AA12 [shape=record, label="{BB12:\l\l  %13 = add-nsw %i,  %8\l %14 = getelementptr %a,  %add2\l %15 = load %14\l %16 = icmp-ne %15,  0\l br %16 BB17 BB47\l}"];
+	AA12 -> AA17
+	AA12 -> AA47
+	AA17 [shape=record, label="{BB17:\l\l  %18 = sub-nsw %i,  %8\l %19 = add-nsw %18,  7\l %20 = getelementptr %c,  %add7\l %21 = load %20\l %22 = icmp-ne %21,  0\l br %22 BB23 BB47\l}"];
+	AA17 -> AA23
+	AA17 -> AA47
+	AA23 [shape=record, label="{BB23:\l\l  %24 = getelementptr %x,  %i\l %51 = store %8,  %24\l %25 = getelementptr %b,  %add\l %52 = store 0,  %25\l %26 = add-nsw %i,  %8\l %27 = getelementptr %a,  %add15\l %53 = store 0,  %27\l %28 = sub-nsw %i,  %8\l %29 = add-nsw %28,  7\l %30 = getelementptr %c,  %add19\l %54 = store 0,  %30\l %31 = icmp-slt %i,  8\l br %31 BB32 BB45\l}"];
+	AA23 -> AA32
+	AA23 -> AA45
+	AA32 [shape=record, label="{BB32:\l\l  %33 = add-nsw %i,  1\l %55 = @Try(%add24, %q, %a, %b, %c, %x)\l %35 = load %q\l %36 = icmp-ne %35,  0\l br %36 BB44 BB37\l}"];
+	AA32 -> AA44
+	AA32 -> AA37
+	AA37 [shape=record, label="{BB37:\l\l  %38 = getelementptr %b,  %add\l %56 = store 1,  %38\l %39 = add-nsw %i,  %8\l %40 = getelementptr %a,  %add29\l %57 = store 1,  %40\l %41 = sub-nsw %i,  %8\l %42 = add-nsw %41,  7\l %43 = getelementptr %c,  %add33\l %58 = store 1,  %43\l br  BB44\l}"];
+	AA37 -> AA44
+	AA44 [shape=record, label="{BB44:\l\l  br  BB46\l}"];
+	AA44 -> AA46
+	AA45 [shape=record, label="{BB45:\l\l  %59 = store 1,  %q\l br  BB46\l}"];
+	AA45 -> AA46
+	AA46 [shape=record, label="{BB46:\l\l  br  BB47\l}"];
+	AA46 -> AA47
+	AA47 [shape=record, label="{BB47:\l\l  br  BB1\l}"];
+	AA47 -> AA1
+	AA48 [shape=record, label="{BB48:\l\l  ret void\l}"];
+}

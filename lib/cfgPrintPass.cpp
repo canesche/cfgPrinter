@@ -11,14 +11,13 @@ namespace cfgPrint {
 
     string cfgPrinterPass::getName(const Value *v) {
         string s = getLabel(v);
-        if (opInstr.count(s) > 0) {
+        if (opInstr.count(s) > 0)
             return opInstr[s];
-        }
         return s;
     }
 
     void cfgPrinterPass::get_map_label(Function &F) {
-        //errs() << F.getName().str() << "\n";
+        //errs() << "\n" << F.getName().str() << "\n";
         for (Function::iterator bb = F.begin(), e = F.end(); bb != e; ++bb) {
             opInstr[getLabel(&(*bb))] = to_string(counter++);
             //errs() << getLabel(&(*bb)) << " " << opInstr[getLabel(&(*bb))] << "BB\n";
@@ -26,18 +25,21 @@ namespace cfgPrint {
                 if (!isa<SExtInst>(*I) && !isa<BranchInst>(*I) && !isa<PHINode>(*I) 
                     && !isa<ReturnInst>(*I) && !isa<StoreInst>(*I)) {
                     opInstr[getLabel(&(*I))] = to_string(counter++);
-                    //errs() << getLabel(&(*I)) << " " << opInstr[getLabel(&(*I))] << "I\n";
+                    //errs() << getLabel(&(*I)) << " " << opInstr[getLabel(&(*I))] << "I " << *I << "\n";
                 }
             }
         }
+    }
+
+    void cfgPrinterPass::create_file(Function &F) {
+        outFile.open(F.getName().str()+".dot");
     }
 
     PreservedAnalyses cfgPrinterPass::run(Function &F, FunctionAnalysisManager &FAM) {
 
         // Counter for Instruction and branch
         counter = 0;
-        outFile.open(F.getName().str()+".dot");
-
+        create_file(F);
         get_map_label(F);
 
         outFile << "digraph \"CFG for '" << F.getName().str() << "' function\" {\n";
@@ -121,7 +123,7 @@ namespace cfgPrint {
         
         for (int i = 0; i < phi->getNumIncomingValues(); ++i) {
             outFile << "[ ";
-            if (isa<Constant>(phi->getIncomingValue(i))) {
+            if (isa<ConstantInt>(phi->getIncomingValue(i))) {
                 outFile << dyn_cast<ConstantInt>(phi->getIncomingValue(i))->getZExtValue();
             } else {
                 outFile << " %" << getName(phi->getIncomingValue(i));
@@ -150,25 +152,34 @@ namespace cfgPrint {
 
     void cfgPrinterPass::CallNode(BasicBlock::iterator I) {
 
-        outFile << " %" << getName(&(*I)) << " = ";
-        
         string s;
         llvm::raw_string_ostream(s) << *I;
 
         if (s.find("void") != string::npos) {
-            
-            if (s.find("i32") != string::npos)
-                s.erase(s.begin()+s.find("i32"),s.begin()+s.find("i32")+4);
-            
-            outFile << s;
+            outFile << " %" << to_string(counter++) << " = ";
+            outFile << "@" << getLabel(I->getOperand(I->getNumOperands()-1)) << "("; 
+            for (int i = 0; i < I->getNumOperands()-1; ++i) {
+                if (getLabel(I->getOperand(i)) != "") {
+                    outFile << "%" << getLabel(I->getOperand(i));
+                    if (i < I->getNumOperands()-2)
+                        outFile << ", ";
+                } else if (isa<ConstantInt>(I->getOperand(i))) {
+                    outFile << dyn_cast<ConstantInt>(I->getOperand(i))->getZExtValue();
+                    if (i < I->getNumOperands()-2)
+                        outFile << ", ";
+                }
+            }
+            outFile << ")";
         } else {
+            outFile << " %" << getName(&(*I)) << " = ";
             outFile << I->getOpcodeName();
 
             if (s.find("printf") != string::npos) {
-                outFile << " @printf("; 
+                outFile << " @printf"; 
             } else if (s.find("atoi") != string::npos) {
-                outFile << " atoi(";
+                outFile << " atoi";
             }
+            outFile << "(";
 
             for (int i = I->getNumOperands()-1; i > 0; --i) {
                 if (getName(I->getOperand(i)) != "printf") {
@@ -181,7 +192,17 @@ namespace cfgPrint {
     }
 
     void cfgPrinterPass::StoreNode(BasicBlock::iterator I) {
-        //outFile << " %" << I->getOpcodeName() << " = "
+        outFile << " %" << counter++ << " = " << I->getOpcodeName();
+        for (int i = 0; i < I->getNumOperands(); ++i) {
+            if (isa<ConstantInt>(I->getOperand(i))) {
+                outFile << " " << dyn_cast<ConstantInt>(I->getOperand(i))->getZExtValue();
+            } else {
+                outFile << " %" << getName(I->getOperand(i));
+            }
+        
+            if (I->getNumOperands()-1 != i) outFile << ", ";
+        }
+        outFile << "\\l";
     }
 
     void cfgPrinterPass::OtherNode(BasicBlock::iterator I) {

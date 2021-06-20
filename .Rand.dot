@@ -1,5 +1,5 @@
 digraph "CFG for 'Rand' function" {
 	label="CFG for 'Rand' function";
 
-	Node0x9b9be0 [shape=record,label="{entry:\l  %0 = load i64, i64* @seed, align 8\l  %mul = mul nsw i64 %0, 1309\l  %add = add nsw i64 %mul, 13849\l  %and = and i64 %add, 65535\l  store i64 %and, i64* @seed, align 8\l  %1 = load i64, i64* @seed, align 8\l  %conv = trunc i64 %1 to i32\l  ret i32 %conv\l}"];
+	Node0x18a6c80 [shape=record,label="{entry:\l  %tmp = load i64, i64* @seed, align 8\l  %mul = mul nsw i64 %tmp, 1309\l  %add = add nsw i64 %mul, 13849\l  %and = and i64 %add, 65535\l  store i64 %and, i64* @seed, align 8\l  %tmp1 = load i64, i64* @seed, align 8\l  %conv = trunc i64 %tmp1 to i32\l  ret i32 %conv\l}"];
 }

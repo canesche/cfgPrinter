@@ -1,0 +1,11 @@
+digraph "CFG for 'Quick' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %17 = @Initarr()\l %18 = @Quicksort(1, 5000)\l %3 = load %2\l %4 = load %littlest\l %5 = icmp-ne %3,  %4\l br %5 BB10 BB6\l}"];
+	AA0 -> AA10
+	AA0 -> AA6
+	AA6 [shape=record, label="{BB6:\l\l  %7 = load %2\l %8 = load %biggest\l %9 = icmp-ne %7,  %8\l br %9 BB10 BB12\l}"];
+	AA6 -> AA10
+	AA6 -> AA12
+	AA10 [shape=record, label="{BB10:\l\l  %11 = call @printf()\l br  BB12\l}"];
+	AA10 -> AA12
+	AA12 [shape=record, label="{BB12:\l\l  %13 = add-nsw %run,  1\l %14 = getelementptr %sortlist,  0,  %add\l %15 = load %14\l %16 = call @printf(%15)\l ret void\l}"];
+}

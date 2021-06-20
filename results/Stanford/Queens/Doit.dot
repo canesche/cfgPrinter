@@ -1,0 +1,33 @@
+digraph "CFG for 'Doit' function" {
+	AA0 [shape=record, label="{BB0:\l\l  %1 = alloca 1\l %2 = alloca 1\l %3 = alloca 1\l %4 = alloca 1\l %5 = alloca 1\l br  BB6\l}"];
+	AA0 -> AA6
+	AA6 [shape=record, label="{BB6:\l\l  %i.0 = phi [ 4294967289, BB0 ], [  %24, BB23 ]\l %7 = icmp-sle %i.0,  16\l br %7 BB8 BB25\l}"];
+	AA6 -> AA8
+	AA6 -> AA25
+	AA8 [shape=record, label="{BB8:\l\l  %9 = icmp-sge %i.0,  1\l br %9 BB10 BB14\l}"];
+	AA8 -> AA10
+	AA8 -> AA14
+	AA10 [shape=record, label="{BB10:\l\l  %11 = icmp-sle %i.0,  8\l br %11 BB12 BB14\l}"];
+	AA10 -> AA12
+	AA10 -> AA14
+	AA12 [shape=record, label="{BB12:\l\l  %13 = getelementptr %2,  0,  %i.0\l %36 = store 1,  %13\l br  BB14\l}"];
+	AA12 -> AA14
+	AA14 [shape=record, label="{BB14:\l\l  %15 = icmp-sge %i.0,  2\l br %15 BB16 BB18\l}"];
+	AA14 -> AA16
+	AA14 -> AA18
+	AA16 [shape=record, label="{BB16:\l\l  %17 = getelementptr %3,  0,  %i.0\l %37 = store 1,  %17\l br  BB18\l}"];
+	AA16 -> AA18
+	AA18 [shape=record, label="{BB18:\l\l  %19 = icmp-sle %i.0,  7\l br %19 BB20 BB23\l}"];
+	AA18 -> AA20
+	AA18 -> AA23
+	AA20 [shape=record, label="{BB20:\l\l  %21 = add-nsw %i.0,  7\l %22 = getelementptr %4,  0,  %add\l %38 = store 1,  %22\l br  BB23\l}"];
+	AA20 -> AA23
+	AA23 [shape=record, label="{BB23:\l\l  %24 = add-nsw %i.0,  1\l br  BB6\l}"];
+	AA23 -> AA6
+	AA25 [shape=record, label="{BB25:\l\l  %26 = getelementptr %3,  0,  0\l %27 = getelementptr %2,  0,  0\l %28 = getelementptr %4,  0,  0\l %29 = getelementptr %5,  0,  0\l %39 = @Try(1, %q, %arraydecay, %arraydecay14, %arraydecay15, %arraydecay16)\l %31 = load %1\l %32 = icmp-ne %31,  0\l br %32 BB35 BB33\l}"];
+	AA25 -> AA35
+	AA25 -> AA33
+	AA33 [shape=record, label="{BB33:\l\l  %34 = call @printf()\l br  BB35\l}"];
+	AA33 -> AA35
+	AA35 [shape=record, label="{BB35:\l\l  ret void\l}"];
+}

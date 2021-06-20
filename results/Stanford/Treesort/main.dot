@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	AA0 [shape=record, label="{BB0:\l\l  br  BB1\l}"];
+	AA0 -> AA1
+	AA1 [shape=record, label="{BB1:\l\l  %i.0 = phi [ 0, BB0 ], [  %6, BB5 ]\l %2 = icmp-slt %i.0,  100\l br %2 BB3 BB7\l}"];
+	AA1 -> AA3
+	AA1 -> AA7
+	AA3 [shape=record, label="{BB3:\l\l  %8 = @Trees(%i.0)\l br  BB5\l}"];
+	AA3 -> AA5
+	AA5 [shape=record, label="{BB5:\l\l  %6 = add-nsw %i.0,  1\l br  BB1\l}"];
+	AA5 -> AA1
+	AA7 [shape=record, label="{BB7:\l\l  ret 0\l}"];
+}
