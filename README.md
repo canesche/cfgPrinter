@@ -29,3 +29,7 @@ $> CLANG=</path/to/clang>
 # How to use
 
 To compile and run the program, execute the "run.sh" shellscript
+
+# Results
+
+All dot files generated are shown on the results file.
