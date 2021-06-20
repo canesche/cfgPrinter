@@ -1,14 +1,47 @@
+//===-- cfgPrintPass.cpp ---------------------------------------*- C++ -*-===//
+/* MIT License
+
+    Copyright (c) 2021 Michael Canesche, Caio Raposo
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+*/
+//===----------------------------------------------------------------------===//
+/*
+    \file
+    This file contains the implementation of the cfgPrintPass, which use
+    it to print CFG.
+*/
+//===----------------------------------------------------------------------===//
+
 #include "cfgPrint.h"
 
 using namespace llvm;
 
 namespace cfgPrint {
-
+    
+    // get label of register
     string cfgPrinterPass::getLabel(const Value *v) {
         StringRef bbName(v->getName());
         return bbName.str();
     }
 
+    // get label of register and set on number map 
     string cfgPrinterPass::getName(const Value *v) {
         string s = getLabel(v);
         if (opInstr.count(s) > 0)
@@ -16,32 +49,26 @@ namespace cfgPrint {
         return s;
     }
 
+    // get number map of all instruction and basicblock
     void cfgPrinterPass::get_map_label(Function &F) {
-        //errs() << "\n" << F.getName().str() << "\n";
         for (Function::iterator bb = F.begin(), e = F.end(); bb != e; ++bb) {
             opInstr[getLabel(&(*bb))] = to_string(counter++);
-            //errs() << getLabel(&(*bb)) << " " << opInstr[getLabel(&(*bb))] << "BB\n";
             for (BasicBlock::iterator I = bb->begin(), e = bb->end(); I != e; ++I) {
                 if (!isa<SExtInst>(*I) && !isa<BranchInst>(*I) && !isa<PHINode>(*I) 
                     && !isa<ReturnInst>(*I) && !isa<StoreInst>(*I)) {
                     opInstr[getLabel(&(*I))] = to_string(counter++);
-                    //errs() << getLabel(&(*I)) << " " << opInstr[getLabel(&(*I))] << "I " << *I << "\n";
                 }
             }
         }
-    }
-
-    void cfgPrinterPass::create_file(Function &F) {
-        outFile.open(F.getName().str()+".dot");
     }
 
     PreservedAnalyses cfgPrinterPass::run(Function &F, FunctionAnalysisManager &FAM) {
 
         // Counter for Instruction and branch
         counter = 0;
-        create_file(F);
         get_map_label(F);
 
+        outFile.open(F.getName().str()+".dot");
         outFile << "digraph \"CFG for '" << F.getName().str() << "' function\" {\n";
         for (Function::iterator bb = F.begin(), e = F.end(); bb != e; ++bb) {
             runBasicBlock(bb);
@@ -52,6 +79,7 @@ namespace cfgPrint {
         return PreservedAnalyses::all();
     }
 
+    // Executing Basic Block
     void cfgPrinterPass::runBasicBlock(Function::iterator &bb) {
 
         string block_name = getName(&(*bb)); 
@@ -70,6 +98,7 @@ namespace cfgPrint {
         }
     }
 
+    // Executing Instruction
     void cfgPrinterPass::runInstruction(BasicBlock::iterator I, vector<string> &target) {
 
         // get the opcode name of each instruction
@@ -94,7 +123,7 @@ namespace cfgPrint {
             case Instruction::Store: // Store
                 StoreNode(I);
                 break;
-            default:
+            default: // other type
                 OtherNode(I); 
                 break;
         }
