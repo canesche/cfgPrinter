@@ -1,9 +1,10 @@
 set -e
 
-LLVM_INSTALL_DIR=""
-PATH_LIB="build/lib/libCfgPrinter.so"
-OPT="opt"
-CLANG="clang"
+LLVM_INSTALL_DIR="" # </path/to/llvm/>, if you use binary installation, you can leave empty this string 
+LLVM_OPT="opt" # </path/to/opt>
+CLANG="clang" # </path/to/clang>
+
+PATH_LIB="build/lib/libCfgPrinter.so" 
 
 # Create the build
 if [ ! -e "build" ]; then
@@ -34,8 +35,8 @@ fi
 echo "Executing the pass for bench: "$EXAMPLE
 # analysis pass
 $CLANG -Wno-everything -fno-discard-value-names -Xclang -disable-O0-optnone -S -emit-llvm $EXAMPLE".c" -o $EXAMPLE".ll"
-$OPT -S -mem2reg $EXAMPLE".ll" -o $EXAMPLE"_opt.ll"
-$OPT -load-pass-plugin $PATH_LIB -passes="cfgPrinter" $EXAMPLE"_opt.ll" -disable-output
+$LLVM_OPT -S -mem2reg $EXAMPLE".ll" -o $EXAMPLE"_opt.ll"
+$LLVM_OPT -load-pass-plugin $PATH_LIB -passes="cfgPrinter" $EXAMPLE"_opt.ll" -disable-output
 
 mv *dot "results/test"
 
@@ -70,11 +71,9 @@ for ((i = 0; i < ${#BENCH[@]}; i++)); do
 
     EXAMPLE=benchmarks/${BENCH[i]}
     $CLANG -Wno-everything -fno-discard-value-names -Xclang -disable-O0-optnone -S -emit-llvm benchmarks/Stanford/${BENCH[i]}".c" -o $EXAMPLE".ll"
-    $OPT -S -instnamer -mem2reg $EXAMPLE".ll" -o $EXAMPLE"_opt.ll"
+    $LLVM_OPT -S -instnamer -mem2reg $EXAMPLE".ll" -o $EXAMPLE"_opt.ll"
     
-    #$OPT --dot-cfg $EXAMPLE"_opt.ll"
-    
-    $OPT -load-pass-plugin $PATH_LIB -passes="cfgPrinter" $EXAMPLE"_opt.ll" -disable-output
+    $LLVM_OPT -load-pass-plugin $PATH_LIB -passes="cfgPrinter" $EXAMPLE"_opt.ll" -disable-output
     
     mv *.dot "results/Stanford/${BENCH[i]}"
 done
