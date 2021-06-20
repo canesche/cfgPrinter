@@ -23,4 +23,30 @@ EXAMPLE=examples/file
 # analysis pass
 $CLANG -fno-discard-value-names -Xclang -disable-O0-optnone -S -emit-llvm $EXAMPLE".c" -o $EXAMPLE".ll"
 $OPT -S -mem2reg $EXAMPLE".ll" -o $EXAMPLE"_opt.ll"
-$OPT -instnamer -load-pass-plugin $PATH_LIB -passes="cfgPrinter" $EXAMPLE"_opt.ll"
+$OPT -load-pass-plugin $PATH_LIB -passes="cfgPrinter" $EXAMPLE"_opt.ll"
+
+#$OPT --dot-cfg $EXAMPLE"_opt.ll"
+
+BENCH=(
+    Bubblesort
+    #FloatMM
+    #IntMM
+    #Oscar
+    #Perm
+    #Puzzle
+    #Queens
+    #Quicksort
+    #ealMM
+    #Towers
+    #Treesort
+)
+
+for ((i = 0; i < ${#BENCH[@]}; i++)); do
+    EXAMPLE=examples/${BENCH[i]}
+    $CLANG -fno-discard-value-names -Xclang -disable-O0-optnone -S -emit-llvm Stanford/${BENCH[i]}".c" -o $EXAMPLE".ll"
+    $OPT -S -mem2reg $EXAMPLE".ll" -o $EXAMPLE"_opt.ll"
+    
+    $OPT --dot-cfg $EXAMPLE"_opt.ll"
+    
+    $OPT -load-pass-plugin $PATH_LIB -passes="cfgPrinter" $EXAMPLE"_opt.ll"
+done

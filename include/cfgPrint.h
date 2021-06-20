@@ -11,6 +11,7 @@
 #include "llvm/IR/Function.h"
 #include "llvm/IR/Instructions.h"
 #include "llvm/IR/PassManager.h"
+#include <llvm/Support/raw_ostream.h>
 
 using namespace llvm;
 using namespace std;
@@ -34,6 +35,9 @@ namespace cfgPrint {
         void BrNode(BasicBlock::iterator I, vector<string> &target);
         void PhiNode(BasicBlock::iterator I);
         void RetNode(BasicBlock::iterator I);
+        void SExtNode(BasicBlock::iterator I);
+        void CallNode(BasicBlock::iterator I);
+        void StoreNode(BasicBlock::iterator I);
         void OtherNode(BasicBlock::iterator I);
         
         private:

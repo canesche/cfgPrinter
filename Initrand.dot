@@ -1,0 +1,3 @@
+digraph "CFG for 'Initrand' function" {
+	AA0 [shape=record, label="{BB0:\l\l  ret void\l}"];
+}
